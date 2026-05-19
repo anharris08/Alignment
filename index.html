@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>From Fragmentation to Alignment</title>
+  <style>
+    :root {
+      --deep-plum: #2b1635;
+      --violet: #6d4ba3;
+      --rose: #d89aa5;
+      --gold: #d8b56d;
+      --sage: #9bb99b;
+      --cream: #fff8ec;
+      --soft-lavender: #efe5ff;
+      --charcoal: #251f2d;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at top left, rgba(216, 181, 109, 0.25), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(155, 185, 155, 0.28), transparent 38%),
+        linear-gradient(135deg, #22122d 0%, #3b254a 45%, #6d4ba3 100%);
+      color: var(--cream);
+      min-height: 100vh;
+      padding: 42px 22px;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+
+    .site-nav {
+      position: sticky;
+      top: 16px;
+      z-index: 50;
+      max-width: 1180px;
+      margin: 0 auto 24px;
+      padding: 12px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      border: 1px solid rgba(255, 248, 236, 0.20);
+      border-radius: 999px;
+      background: rgba(43, 22, 53, 0.72);
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(14px);
+      font-family: Arial, sans-serif;
+    }
+
+    .site-nav a {
+      color: rgba(255, 248, 236, 0.84);
+      text-decoration: none;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.2px;
+      transition: all 0.25s ease;
+    }
+
+    .site-nav a:hover,
+    .site-nav a.active {
+      color: var(--cream);
+      background: rgba(216, 181, 109, 0.18);
+      border-color: rgba(216, 181, 109, 0.38);
+      box-shadow: 0 0 22px rgba(216, 181, 109, 0.16);
+      transform: translateY(-1px);
+    }
+
+    .hero {
+      text-align: center;
+      padding: 44px 26px 36px;
+      border: 1px solid rgba(255, 248, 236, 0.25);
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.08);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(14px);
+      margin-bottom: 34px;
+    }
+
+    .eyebrow {
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: clamp(2.1rem, 5vw, 4.8rem);
+      line-height: 1.04;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      max-width: 830px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: rgba(255, 248, 236, 0.9);
+    }
+
+    .alignment-pillars {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 28px 0 38px;
+    }
+
+    .pillar {
+      background: rgba(255, 248, 236, 0.11);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      border-radius: 22px;
+      padding: 18px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+    }
+
+    .pillar span {
+      display: block;
+      color: var(--gold);
+      font-size: 1.45rem;
+      margin-bottom: 8px;
+    }
+
+    .flow {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 34px;
+    }
+
+    .phase {
+      position: relative;
+      min-height: 500px;
+      border-radius: 30px;
+      padding: 26px 22px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      box-shadow: 0 18px 55px rgba(0, 0, 0, 0.24);
+    }
+
+    .phase::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: 0.95;
+      z-index: 0;
+    }
+
+    .phase > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .phase-1::before { background: linear-gradient(180deg, rgba(43, 22, 53, 0.98), rgba(67, 45, 74, 0.94)); }
+    .phase-2::before { background: linear-gradient(180deg, rgba(109, 75, 163, 0.97), rgba(70, 48, 112, 0.94)); }
+    .phase-3::before { background: linear-gradient(180deg, rgba(155, 185, 155, 0.95), rgba(74, 105, 83, 0.95)); }
+    .phase-4::before { background: linear-gradient(180deg, rgba(216, 181, 109, 0.96), rgba(142, 96, 55, 0.95)); }
+
+    .number {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255, 248, 236, 0.17);
+      border: 1px solid rgba(255, 248, 236, 0.3);
+      color: #fff;
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .phase h2 {
+      font-size: 1.65rem;
+      margin-bottom: 8px;
+      line-height: 1.1;
+    }
+
+    .phase h3 {
+      font-family: Arial, sans-serif;
+      font-size: 0.86rem;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
+      color: rgba(255, 248, 236, 0.78);
+      margin-bottom: 18px;
+    }
+
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 18px;
+    }
+
+    .card-tag {
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      padding: 7px 9px;
+      border-radius: 999px;
+      background: rgba(255, 248, 236, 0.18);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+    }
+
+    ul {
+      list-style: none;
+      margin: 18px 0;
+    }
+
+    li {
+      font-family: Arial, sans-serif;
+      font-size: 0.93rem;
+      line-height: 1.55;
+      margin-bottom: 10px;
+      padding-left: 19px;
+      position: relative;
+    }
+
+    li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      color: var(--cream);
+      opacity: 0.88;
+    }
+
+    .message {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(255, 248, 236, 0.14);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      font-style: italic;
+      line-height: 1.5;
+    }
+
+    .bridge {
+      margin: 12px auto 34px;
+      max-width: 890px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      line-height: 1.7;
+      color: rgba(255, 248, 236, 0.9);
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 248, 236, 0.16);
+      border-radius: 26px;
+      padding: 24px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: rgba(255, 248, 236, 0.1);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.2);
+    }
+
+    .panel h2 {
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .quote {
+      font-size: clamp(1.5rem, 3vw, 2.35rem);
+      line-height: 1.25;
+      color: var(--cream);
+    }
+
+    .reflection-grid {
+      display: grid;
+      gap: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    .reflection {
+      background: rgba(255, 248, 236, 0.12);
+      padding: 14px 16px;
+      border-radius: 18px;
+      line-height: 1.45;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255, 248, 236, 0.72);
+      margin-top: 28px;
+    }
+
+    @media (max-width: 980px) {
+      .flow,
+      .alignment-pillars,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+      .phase {
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+  <nav class="site-nav" aria-label="Alignment Ecosystem navigation">
+    <a class="active" href="https://anharris08.github.io/Alignment/">Fragmentation to Alignment</a>
+    <a href="https://anharris08.github.io/Alignment/can-method.html">The CAN Method</a>
+    <a href="https://anharris08.github.io/Alignment/alignment-ecosystem.html">Alignment Ecosystem</a>
+  </nav>
+
+    <section class="hero">
+      <div class="eyebrow">A Healing + Alignment Framework</div>
+      <h1>From Fragmentation<br />to Embodied Freedom</h1>
+      <p class="subtitle">
+        A visual roadmap inspired by an epiphany and tarot confirmation: the journey of simplifying life, healing the nervous system, and returning to mental, physical, and spiritual alignment.
+      </p>
+    </section>
+
+    <section class="alignment-pillars">
+      <div class="pillar"><span>☾</span><strong>Mental Alignment</strong><br />Clarity over overthinking</div>
+      <div class="pillar"><span>✺</span><strong>Physical Alignment</strong><br />Grounding, rest, routine</div>
+      <div class="pillar"><span>✧</span><strong>Spiritual Alignment</strong><br />Intuition, purpose, peace</div>
+    </section>
+
+    <section class="flow">
+      <article class="phase phase-1">
+        <div class="number">1</div>
+        <h2>Fragmentation</h2>
+        <h3>The Split Self</h3>
+        <div class="cards">
+          <span class="card-tag">2 of Knives</span>
+          <span class="card-tag">4 of Baskets</span>
+        </div>
+        <ul>
+          <li>Overthinking and divided focus</li>
+          <li>Burnout disguised as ambition</li>
+          <li>Trying to carry too many identities</li>
+          <li>Emotional numbness or dissatisfaction</li>
+          <li>Building from pressure instead of peace</li>
+        </ul>
+        <div class="message">You cannot heal while constantly divided within yourself.</div>
+      </article>
+
+      <article class="phase phase-2">
+        <div class="number">2</div>
+        <h2>The Leap</h2>
+        <h3>Choosing Alignment</h3>
+        <div class="cards">
+          <span class="card-tag">The Fool</span>
+          <span class="card-tag">Knight of Cups</span>
+          <span class="card-tag">Whisper of Mother Earth</span>
+        </div>
+        <ul>
+          <li>Stepping away from chaos</li>
+          <li>Trusting the deeper calling</li>
+          <li>Choosing healing over constant output</li>
+          <li>Grounding the body and nervous system</li>
+          <li>Asking: what truly aligns with who I am becoming?</li>
+        </ul>
+        <div class="message">The reset is not escape. It is return.</div>
+      </article>
+
+      <article class="phase phase-3">
+        <div class="number">3</div>
+        <h2>Rebuilding</h2>
+        <h3>Focused Purpose</h3>
+        <div class="cards">
+          <span class="card-tag">3 of Coins</span>
+          <span class="card-tag">Son of Wands</span>
+          <span class="card-tag">Page of Cups</span>
+        </div>
+        <ul>
+          <li>Developing mastery and structure</li>
+          <li>Specializing instead of scattering</li>
+          <li>Reconnecting with creativity and intuition</li>
+          <li>Building one aligned path with discipline</li>
+          <li>Turning vision into practical systems</li>
+        </ul>
+        <div class="message">Alignment creates momentum.</div>
+      </article>
+
+      <article class="phase phase-4">
+        <div class="number">4</div>
+        <h2>Embodied Freedom</h2>
+        <h3>The Integrated Self</h3>
+        <div class="cards">
+          <span class="card-tag">2 of Cups</span>
+          <span class="card-tag">9 of Pentacles</span>
+          <span class="card-tag">The Anointed</span>
+        </div>
+        <ul>
+          <li>Mind, body, and spirit working together</li>
+          <li>Peaceful independence</li>
+          <li>Financial and emotional stability</li>
+          <li>Magnetic energy instead of forced energy</li>
+          <li>Purpose expressed through a grounded life</li>
+        </ul>
+        <div class="message">True abundance begins when you stop fighting yourself.</div>
+      </article>
+    </section>
+
+    <section class="bridge">
+      This framework is not about becoming someone new. It is about removing the noise, pressure, and fragmentation that kept the aligned self hidden.
+    </section>
+
+    <section class="bottom-grid">
+      <div class="panel">
+        <h2>Core Teaching</h2>
+        <p class="quote">When the mind is scattered, the body is exhausted, and the spirit is unheard, success can still feel empty. Alignment restores direction.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Reflection Prompts</h2>
+        <div class="reflection-grid">
+          <div class="reflection">Where am I currently divided within myself?</div>
+          <div class="reflection">What am I forcing that no longer feels aligned?</div>
+          <div class="reflection">What would my life look like if I chose clarity over chaos?</div>
+          <div class="reflection">What one path deserves my focused energy right now?</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">Mind • Body • Spirit • Purpose • Freedom</p>
+  </main>
+</body>
+</html>

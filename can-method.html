@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The CAN Method — Personal Finance Alignment</title>
+  <style>
+    :root {
+      --deep-plum: #2b1635;
+      --violet: #6d4ba3;
+      --rose: #d89aa5;
+      --gold: #d8b56d;
+      --sage: #9bb99b;
+      --cream: #fff8ec;
+      --soft-lavender: #efe5ff;
+      --charcoal: #251f2d;
+      --blue-mist: #9fb8d8;
+      --earth: #a87953;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      padding: 42px 22px;
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(216, 181, 109, 0.24), transparent 30%),
+        radial-gradient(circle at 82% 18%, rgba(216, 154, 165, 0.20), transparent 32%),
+        radial-gradient(circle at 50% 95%, rgba(155, 185, 155, 0.25), transparent 40%),
+        linear-gradient(135deg, #22122d 0%, #3b254a 48%, #6d4ba3 100%);
+      overflow-x: hidden;
+    }
+
+    .page {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .hero {
+      position: relative;
+      text-align: center;
+      padding: 48px 28px 38px;
+      border-radius: 34px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 248, 236, 0.22);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.30);
+      backdrop-filter: blur(14px);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      width: 280px;
+      height: 280px;
+      border-radius: 50%;
+      border: 1px solid rgba(216, 181, 109, 0.34);
+      top: -130px;
+      right: -80px;
+      animation: slowSpin 28s linear infinite;
+    }
+
+    .hero::after {
+      content: "✦";
+      position: absolute;
+      color: rgba(216, 181, 109, 0.55);
+      font-size: 54px;
+      left: 8%;
+      top: 20%;
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      position: relative;
+      z-index: 1;
+      color: var(--gold);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-size: 0.78rem;
+      margin-bottom: 14px;
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    h1 {
+      position: relative;
+      z-index: 1;
+      font-size: clamp(2.2rem, 5vw, 4.8rem);
+      line-height: 1.04;
+      margin-bottom: 18px;
+    }
+
+    .subtitle {
+      position: relative;
+      z-index: 1;
+      max-width: 830px;
+      margin: 0 auto;
+      font-family: Arial, sans-serif;
+      font-size: 1.08rem;
+      line-height: 1.75;
+      color: rgba(255, 248, 236, 0.9);
+    }
+
+    .formula-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 30px 0 36px;
+    }
+
+    .formula-card {
+      position: relative;
+      overflow: hidden;
+      background: rgba(255, 248, 236, 0.11);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      border-radius: 24px;
+      padding: 22px 18px;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      animation: fadeUp 900ms ease both;
+    }
+
+    .formula-card:nth-child(2) { animation-delay: 120ms; }
+    .formula-card:nth-child(3) { animation-delay: 240ms; }
+
+    .formula-card span {
+      display: block;
+      color: var(--gold);
+      font-size: 1.65rem;
+      margin-bottom: 10px;
+    }
+
+    .formula-card strong {
+      display: block;
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .formula-card p {
+      color: rgba(255, 248, 236, 0.78);
+      line-height: 1.45;
+      font-size: 0.92rem;
+    }
+
+    .can-stage {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 22px;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+
+    .money-flow {
+      min-height: 620px;
+      border-radius: 34px;
+      padding: 28px;
+      position: relative;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      box-shadow: 0 20px 65px rgba(0, 0, 0, 0.27);
+      overflow: hidden;
+    }
+
+    .money-flow::before {
+      content: "";
+      position: absolute;
+      inset: 30px;
+      border-radius: 50%;
+      border: 1px dashed rgba(216, 181, 109, 0.30);
+      animation: slowSpin 48s linear infinite;
+    }
+
+    .center-orb {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 24px;
+      background: radial-gradient(circle, rgba(255, 248, 236, 0.27), rgba(216, 181, 109, 0.18));
+      border: 1px solid rgba(255, 248, 236, 0.32);
+      box-shadow: 0 0 55px rgba(216, 181, 109, 0.20);
+      animation: breathe 5s ease-in-out infinite;
+    }
+
+    .center-orb strong {
+      display: block;
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .center-orb small {
+      font-family: Arial, sans-serif;
+      line-height: 1.45;
+      color: rgba(255, 248, 236, 0.82);
+    }
+
+    .can {
+      position: absolute;
+      width: 136px;
+      min-height: 126px;
+      padding: 17px 13px;
+      border-radius: 24px;
+      text-align: center;
+      border: 1px solid rgba(255, 248, 236, 0.25);
+      background: rgba(255, 248, 236, 0.13);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.20);
+      backdrop-filter: blur(10px);
+      animation: floatCan 5.5s ease-in-out infinite;
+    }
+
+    .can:nth-child(even) { animation-delay: 550ms; }
+    .can:nth-child(odd) { animation-delay: 150ms; }
+
+    .can .icon {
+      display: block;
+      font-size: 1.55rem;
+      margin-bottom: 8px;
+      color: var(--gold);
+    }
+
+    .can strong {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 0.86rem;
+      margin-bottom: 7px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .can p {
+      font-family: Arial, sans-serif;
+      color: rgba(255, 248, 236, 0.78);
+      font-size: 0.76rem;
+      line-height: 1.35;
+    }
+
+    .c1 { left: 50%; top: 30px; transform: translateX(-50%); }
+    .c2 { right: 40px; top: 135px; }
+    .c3 { right: 52px; bottom: 135px; }
+    .c4 { left: 50%; bottom: 34px; transform: translateX(-50%); }
+    .c5 { left: 52px; bottom: 135px; }
+    .c6 { left: 40px; top: 135px; }
+    .c7 { left: 50%; top: 50%; transform: translate(-50%, -50%) translateY(170px); }
+
+    .instruction-panel {
+      border-radius: 34px;
+      padding: 30px;
+      background: rgba(255, 248, 236, 0.10);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      box-shadow: 0 20px 65px rgba(0, 0, 0, 0.22);
+    }
+
+    .instruction-panel h2 {
+      font-size: 2.2rem;
+      line-height: 1.1;
+      margin-bottom: 16px;
+      color: var(--gold);
+    }
+
+    .instruction-panel p {
+      font-family: Arial, sans-serif;
+      line-height: 1.72;
+      color: rgba(255, 248, 236, 0.88);
+      margin-bottom: 18px;
+    }
+
+    .steps {
+      display: grid;
+      gap: 13px;
+      margin-top: 22px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 42px 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 15px;
+      border-radius: 20px;
+      background: rgba(255, 248, 236, 0.11);
+      border: 1px solid rgba(255, 248, 236, 0.14);
+      animation: slideIn 850ms ease both;
+    }
+
+    .step:nth-child(2) { animation-delay: 120ms; }
+    .step:nth-child(3) { animation-delay: 240ms; }
+    .step:nth-child(4) { animation-delay: 360ms; }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: rgba(216, 181, 109, 0.18);
+      color: var(--gold);
+      font-family: Arial, sans-serif;
+      font-weight: 800;
+      border: 1px solid rgba(216, 181, 109, 0.32);
+    }
+
+    .step strong {
+      display: block;
+      font-family: Arial, sans-serif;
+      margin-bottom: 5px;
+    }
+
+    .step span {
+      display: block;
+      font-family: Arial, sans-serif;
+      color: rgba(255, 248, 236, 0.74);
+      line-height: 1.45;
+      font-size: 0.9rem;
+    }
+
+    .template-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      margin: 34px 0;
+    }
+
+    .mini-can {
+      min-height: 178px;
+      border-radius: 24px;
+      padding: 18px 12px;
+      text-align: center;
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      background: rgba(255, 248, 236, 0.10);
+      font-family: Arial, sans-serif;
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .mini-can:hover {
+      transform: translateY(-8px);
+      background: rgba(255, 248, 236, 0.16);
+    }
+
+    .mini-can .icon {
+      font-size: 1.65rem;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .mini-can h3 {
+      font-size: 0.88rem;
+      margin-bottom: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.7px;
+    }
+
+    .mini-can p {
+      font-size: 0.78rem;
+      line-height: 1.45;
+      color: rgba(255, 248, 236, 0.76);
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 18px;
+    }
+
+    .panel {
+      background: rgba(255, 248, 236, 0.10);
+      border: 1px solid rgba(255, 248, 236, 0.18);
+      border-radius: 28px;
+      padding: 26px;
+      box-shadow: 0 18px 45px rgba(0, 0, 0, 0.20);
+    }
+
+    .panel h2 {
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .quote {
+      font-size: clamp(1.45rem, 3vw, 2.25rem);
+      line-height: 1.25;
+      color: var(--cream);
+    }
+
+    .prompt-list {
+      display: grid;
+      gap: 12px;
+      font-family: Arial, sans-serif;
+    }
+
+    .prompt {
+      background: rgba(255, 248, 236, 0.12);
+      padding: 14px 16px;
+      border-radius: 18px;
+      line-height: 1.45;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: rgba(255, 248, 236, 0.72);
+      margin-top: 28px;
+    }
+
+    .top-nav {
+      position: sticky;
+      top: 14px;
+      z-index: 50;
+      max-width: 1180px;
+      margin: 0 auto 22px;
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      padding: 12px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 248, 236, 0.20);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.22);
+      backdrop-filter: blur(14px);
+      font-family: Arial, sans-serif;
+    }
+
+    .top-nav a {
+      color: var(--cream);
+      text-decoration: none;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      border: 1px solid transparent;
+      transition: all 0.25s ease;
+      white-space: nowrap;
+    }
+
+    .top-nav a:hover,
+    .top-nav a.active {
+      color: #22122d;
+      background: var(--gold);
+      border-color: rgba(255, 248, 236, 0.35);
+      box-shadow: 0 8px 24px rgba(216, 181, 109, 0.24);
+    }
+
+    @keyframes slowSpin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.45; }
+      50% { transform: scale(1.16); opacity: 0.8; }
+    }
+
+    @keyframes breathe {
+      0%, 100% { box-shadow: 0 0 40px rgba(216, 181, 109, 0.16); transform: translate(-50%, -50%) scale(1); }
+      50% { box-shadow: 0 0 75px rgba(216, 181, 109, 0.30); transform: translate(-50%, -50%) scale(1.035); }
+    }
+
+    @keyframes floatCan {
+      0%, 100% { translate: 0 0; }
+      50% { translate: 0 -10px; }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(18px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    @media (max-width: 1060px) {
+      .can-stage,
+      .bottom-grid {
+        grid-template-columns: 1fr;
+      }
+      .template-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      body { padding: 24px 14px; }
+
+      .top-nav {
+        position: relative;
+        top: auto;
+        flex-direction: column;
+        border-radius: 24px;
+      }
+
+      .top-nav a {
+        text-align: center;
+        width: 100%;
+      }
+      .formula-strip,
+      .template-grid {
+        grid-template-columns: 1fr;
+      }
+      .money-flow {
+        min-height: auto;
+        display: grid;
+        gap: 12px;
+      }
+      .money-flow::before,
+      .center-orb {
+        position: relative;
+        inset: auto;
+        left: auto;
+        top: auto;
+        transform: none;
+        margin: 0 auto 16px;
+      }
+      .can {
+        position: relative;
+        left: auto !important;
+        right: auto !important;
+        top: auto !important;
+        bottom: auto !important;
+        transform: none !important;
+        width: 100%;
+        min-height: auto;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav class="top-nav" aria-label="Primary navigation">
+    <a href="https://anharris08.github.io/Alignment/">Alignment Journey</a>
+    <a class="active" href="https://anharris08.github.io/Alignment/can-method.html">CAN Method</a>
+    <a href="https://anharris08.github.io/Alignment/alignment-ecosystem.html">Alignment Ecosystem</a>
+  </nav>
+
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Personal Finance Alignment Template</div>
+      <h1>The CAN Method</h1>
+      <p class="subtitle">
+        A simple money allocation system that helps people give every dollar a purpose before it disappears. This template turns income into intentional categories for stability, growth, generosity, and freedom.
+      </p>
+    </section>
+
+    <section class="formula-strip">
+      <div class="formula-card">
+        <span>☾</span>
+        <strong>Clarity</strong>
+        <p>Know where your money is going before emotion, impulse, or pressure takes over.</p>
+      </div>
+      <div class="formula-card">
+        <span>✺</span>
+        <strong>Automation</strong>
+        <p>Separate funds immediately so discipline does not depend on willpower alone.</p>
+      </div>
+      <div class="formula-card">
+        <span>✧</span>
+        <strong>Nurture</strong>
+        <p>Use money as a tool to support the life, peace, and future you are building.</p>
+      </div>
+    </section>
+
+    <section class="can-stage">
+      <div class="money-flow">
+        <div class="center-orb">
+          <div>
+            <strong>Monthly Income</strong>
+            <small>Divide by percentage, assign by purpose, repeat consistently.</small>
+          </div>
+        </div>
+
+        <div class="can c1">
+          <span class="icon">♡</span>
+          <strong>Give Back</strong>
+          <p>Support people, causes, or community needs with intention.</p>
+        </div>
+
+        <div class="can c2">
+          <span class="icon">⌁</span>
+          <strong>Debt</strong>
+          <p>Reduce balances and reclaim future cash flow.</p>
+        </div>
+
+        <div class="can c3">
+          <span class="icon">◌</span>
+          <strong>Emergency</strong>
+          <p>Create a safety net for unexpected life events.</p>
+        </div>
+
+        <div class="can c4">
+          <span class="icon">✦</span>
+          <strong>Education</strong>
+          <p>Books, courses, skills, healing, and self-improvement.</p>
+        </div>
+
+        <div class="can c5">
+          <span class="icon">☼</span>
+          <strong>Freedom + Fun</strong>
+          <p>Experiences, joy, travel, rest, and soul care.</p>
+        </div>
+
+        <div class="can c6">
+          <span class="icon">⌂</span>
+          <strong>Living</strong>
+          <p>Housing, food, bills, transport, and core needs.</p>
+        </div>
+
+        <div class="can c7">
+          <span class="icon">◇</span>
+          <strong>Investing</strong>
+          <p>Long-term wealth, assets, retirement, and future stability.</p>
+        </div>
+      </div>
+
+      <aside class="instruction-panel">
+        <h2>How It Works</h2>
+        <p>
+          The CAN Method is not about restriction. It is about alignment. Each category receives a percentage of income so money serves the whole person: responsibilities, healing, future growth, joy, and generosity.
+        </p>
+        <p>
+          Percentages can change by season. Debt may receive more during a payoff season. Investing may increase once debt is cleared. The structure adapts, but the discipline stays consistent.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div><strong>Choose Your Cans</strong><span>Select categories that match your current life season and financial goals.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div><strong>Assign Percentages</strong><span>Give each category a percentage until the full income equals 100%.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div><strong>Separate Immediately</strong><span>Use separate accounts, buckets, or trackers to reduce mental accounting.</span></div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div><strong>Review Monthly</strong><span>Adjust the system when debt, income, expenses, or priorities shift.</span></div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="template-grid">
+      <div class="mini-can">
+        <span class="icon">♡</span>
+        <h3>Give Back</h3>
+        <p>Generosity, community care, direct help, or chosen causes.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">⌁</span>
+        <h3>Debt</h3>
+        <p>Credit cards, loans, past-due bills, or payoff plans.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">◌</span>
+        <h3>Emergency</h3>
+        <p>Cash reserves, savings buffer, and survival protection.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">✦</span>
+        <h3>Education</h3>
+        <p>Books, courses, therapy, certifications, and self-growth.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">☼</span>
+        <h3>Freedom + Fun</h3>
+        <p>Travel, self-care, creative play, dates, and joy.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">⌂</span>
+        <h3>Living</h3>
+        <p>Essential expenses that keep life stable and functional.</p>
+      </div>
+      <div class="mini-can">
+        <span class="icon">◇</span>
+        <h3>Investing</h3>
+        <p>Long-term growth, retirement, wealth building, and assets.</p>
+      </div>
+    </section>
+
+    <section class="bottom-grid">
+      <div class="panel">
+        <h2>Core Teaching</h2>
+        <p class="quote">Financial alignment begins when money stops being random and starts becoming assigned, intentional, and connected to purpose.</p>
+      </div>
+
+      <div class="panel">
+        <h2>Reflection Prompts</h2>
+        <div class="prompt-list">
+          <div class="prompt">Which category needs the most attention in this season?</div>
+          <div class="prompt">Where does money currently leak because there is no structure?</div>
+          <div class="prompt">What percentage would create peace, not punishment?</div>
+          <div class="prompt">How should the system change after debt is reduced?</div>
+        </div>
+      </div>
+    </section>
+
+    <p class="footer-note">Clarity • Discipline • Stewardship • Growth • Freedom</p>
+  </main>
+</body>
+</html>
